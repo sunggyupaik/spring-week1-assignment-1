@@ -11,7 +11,7 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Controller {
+public class TaskController {
     List<Task> tasks = new ArrayList<>();
     Long id = 1L;
 
@@ -25,9 +25,6 @@ public class Controller {
     }
 
     public void requestHttp(String method, String path, String body, HttpExchange exchange) throws IOException {
-
-        Long idValue = Long.parseLong(path.substring("/tasks/".length()));
-
         if (method.equals("GET")) {
             if (!path.startsWith("/tasks")) {
                 send(exchange, "", HttpStatus.BAD_REQUEST.getHttpStatus());
@@ -39,6 +36,7 @@ public class Controller {
                 return;
             }
 
+            Long idValue = Long.parseLong(path.substring("/tasks/".length()));
             handleGet(idValue, exchange, HttpStatus.OK.getHttpStatus());
         } else if (method.equals("POST")) {
             if (!path.startsWith("/tasks")) {
@@ -46,13 +44,14 @@ public class Controller {
                 return;
             }
 
-            handleCreate(body, exchange, HttpStatus.OK.getHttpStatus());
+            handleCreate(body, exchange, HttpStatus.CREATED.getHttpStatus());
         } else if (method.equals("PUT") || method.equals("PATCH")) {
             if (!path.startsWith("/tasks")) {
                 send(exchange, "", HttpStatus.BAD_REQUEST.getHttpStatus());
                 return;
             }
 
+            Long idValue = Long.parseLong(path.substring("/tasks/".length()));
             handleUpdate(idValue, body, exchange, HttpStatus.OK.getHttpStatus());
         } else if (method.equals("DELETE")) {
             if (!path.startsWith("/tasks")) {
@@ -60,6 +59,7 @@ public class Controller {
                 return;
             }
 
+            Long idValue = Long.parseLong(path.substring("/tasks/".length()));
             handleDelete(idValue, exchange, HttpStatus.NO_CONTENT.getHttpStatus());
         }
     }

@@ -8,7 +8,7 @@ import java.net.URI;
 import java.util.stream.Collectors;
 
 public class DemoHttpHandler implements HttpHandler {
-    Controller controller = new Controller();
+    TaskController taskController = new TaskController();
 
     @Override
     public void handle(HttpExchange exchange) throws IOException {
@@ -22,6 +22,6 @@ public class DemoHttpHandler implements HttpHandler {
                 .lines()
                 .collect(Collectors.joining("\n"));
 
-        controller.requestHttp(method, path, body, exchange);
+        taskController.requestHttp(method, path, body, exchange);
     }
 }
