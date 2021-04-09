@@ -1,7 +1,7 @@
 # ToDo REST API 만들기
 
 ## 과제 목표
-
+Example
 Java를 이용해서 ToDo REST API를 만들어봅니다.
 
 ![API](https://user-images.githubusercontent.com/14071105/103476206-0456f280-4df7-11eb-89c4-d61845ef45ec.png)
